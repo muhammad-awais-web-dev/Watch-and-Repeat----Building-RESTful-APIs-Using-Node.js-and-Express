@@ -45,5 +45,33 @@ routes.put("/:id",(req,res) => {
         return res.status(500).send('Unexpected Error. Try after some time');
     }
 })
+routes.post("/",(req,res) => {
+    try {
+        const newUser = req.body;
+        userController.createUser(newUser, function(err,message){
+            if(err){
+                res.status(400).send(err);
+            }else{
+                res.status(201).send({status: "OK", data: message});
+            };
+        });
+    } catch (err) {
+        return res.status(500).send('Unexpected Error. Try after some time');
+    }
+})
+routes.delete("/:id",(req,res) => {
+    try {
+        const userId = parseInt(req.params.id);
+        userController.deleteUser(userId, function(err,message){
+            if(err){
+                res.status(400).send(err);
+            }else{
+                res.status(200).send({status: "OK", data: message});
+            };
+        });
+    } catch (err) {
+        return res.status(500).send('Unexpected Error. Try after some time');
+    }
+})
 
 module.exports = routes;

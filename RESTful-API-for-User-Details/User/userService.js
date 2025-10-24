@@ -11,8 +11,18 @@ const updateUserDetails = function(userId, userName, done){
     userDAO.updateUserDetails(userId, userName, done);
 }
 
+const createUser = function(newUser, done){
+    userDAO.createUser(newUser, done);
+}
+
+const deleteUser = function(userId, done){
+    userDAO.deleteUser(userId, done);
+}
+
 module.exports = {
     getAllUsers,
     getUserById,
-    updateUserDetails
+    updateUserDetails,
+    createUser,
+    deleteUser
 }

@@ -9,9 +9,18 @@ const getUserById = function(userId, done) {
 const updateUserDetails = function(userId, userName, done) {
     userService.updateUserDetails(userId, userName, done);
 }
+const createUser = function(newUser, done) {
+    userService.createUser(newUser, done);
+}
+
+const deleteUser = function(userId, done) {
+    userService.deleteUser(userId, done);
+}
 
 module.exports = {
     getUsers,
     getUserById,
-    updateUserDetails
+    updateUserDetails,
+    createUser,
+    deleteUser
 }
