@@ -15,7 +15,28 @@ const registerUser = function(userDetails, done){
         }
     });
 }
+function loginUser(email, password, done){
+    userService.finduser(email, (err, user) => {
+        if(err){
+            return done(err);
+        }
+
+        // verify credentials
+        const userVerified = authService.verifyUser({email, password}, user);
+        if(userVerified){
+            try{
+                const jwtToken = authService.createToken(user);
+                return done(undefined, jwtToken);
+            } catch (e) {
+                return done('Error creating token');
+            }
+        }
+
+        return done('Invalid email or password');
+    });
+}
 
 module.exports = {
-    registerUser
+    registerUser,
+    loginUser
 }
